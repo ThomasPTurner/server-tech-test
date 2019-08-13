@@ -10,7 +10,9 @@ exports.getFromJson = ()=>{
     })
 }
 
-exports.filterObjectsWithHyphensInKeys = (array, filterObj) => {
+
+// will filter an array based on if it's values of it's composite objects match those in the object in the second argument.
+exports.filterObjectsByMultipleKeys = (array, filterObj) => {
     const keysToFilterBy = Object.keys(filterObj)
     return  array.filter(element => {
         return keysToFilterBy.every(key => {
