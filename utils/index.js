@@ -9,3 +9,12 @@ exports.getFromJson = ()=>{
         })
     })
 }
+
+exports.filterObjectsWithHyphensInKeys = (array, filterObj) => {
+    const keysToFilterBy = Object.keys(filterObj)
+    return  array.filter(element => {
+        return keysToFilterBy.every(key => {
+            return (element[key].toString()===filterObj[key])
+        })
+    })
+}

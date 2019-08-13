@@ -1,10 +1,9 @@
-const  { getRestaurantsFromJson } = require('../models/index')
+const { getRestaurantsFromJson } = require('../models/index')
+const { filterObjectsWithHyphensInKeys } = require('../utils')
 
 const getRestaurants = async ({query}, res, next) => {
     const restaurants = await getRestaurantsFromJson()
-    const filteredRestaurants = restaurants.filter(restaurant => {
-        return query['vegan-options'] ? restaurant['vegan-options'] === true : true
-    })
+    const filteredRestaurants = filterObjectsWithHyphensInKeys(restaurants, query)
     return res.status(200).send({restaurants: filteredRestaurants})
 }
 

@@ -41,6 +41,17 @@ describe('/api', ()=>{
                         expect(areAllTrue).to.be.true
                     })
             })
+            it('takes more than one query', ()=>{
+                return request
+                    .get('/api/restaurants/?vegan-options=true&dog-friendly=false')
+                    .expect(200)
+                    .then(({body: {restaurants}}) => {
+                        const areAllTrue = restaurants.every(restaurant=> {
+                            return (restaurant['vegan-options'].toString() && !restaurant['dog-friendly'])
+                        })
+                        expect(areAllTrue).to.be.true
+                    })
+            })
         })
         describe('api/restaurants/:restaurant_id', () => {
             describe('GET', () => {
