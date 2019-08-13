@@ -1,21 +1,116 @@
-# Restaurant API Tech Test
+# Bug Tracker
 
-This task comes with a JSON file containing restaurant data. The challenge is to build an Express REST API which provides restaurant information to the user. In one hour, please complete as many of the tasks as possible. We do not expect you to finish this test, just do as much as possible in the time frame.
+A full stack web application to keep track up of bugs in a non specified system.
+Created as part of a timed tech test.
 
-## The Test
+Deployed versions here:
 
-Using the data provided in `restaurants.json`:
+#### Back End:
 
-1. Create an Express server, which runs on localhost (any port)
-2. Create the `/restaurants` endpoint, which returns all of the restaurants as an array
-3. Create the `/restaurants/:id` endpoint, which returns a single restaurant object where `:id` matches the `id` of a restaurant, or a `404` error if none can be found
-4. Add optional query parameters on the `/restaurants` endpoint called `vegan-options` and `dog-friendly` which each accept the values of `true` / `false` to filter the returned restaurants. Eg a GET request to `/resturants?vegan-options=true&dog-friendly=false` should return only restaurants where the `vegan-options` field equals `true` AND the `dog-friendly` field equals `false`
-5. Add an optional query parameter on the `/restaurants` endpoint called `cuisines` which accepts a comma-separated list of cuisines (eg `/restaurants?cuisines=british,cafe`). Only restaurants which have all the cuisines should be returned. If no matches are found, an empty Array should be returned.
+https://server-tech-test.herokuapp.com/api/restaurants
 
-## Review Criteria
+### Prerequisites
 
-- A clear README with instructions on how to run your server
-- Well structured code
-- A good understanding of Node and Express
-- Descriptive and regular commit messages
-- Good use of Javascript data manipulation methods
+```
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+```
+
+a global installation of the following is required:
+
+``
+npm i nodemon -g
+``
+
+### Installing
+
+#### clone the repo
+
+```
+$ git clone https://github.com/ThomasPTurner/server-tech-test.git
+```
+
+##### Run these scripts from the project directory:
+
+```
+$ npm i
+$ npm run dev
+```
+This will have the server listening. The default listen port is 9090
+
+### To run the tests:
+
+#### set up and run the tests:
+
+Run the following commands in the project directory:
+
+```
+$ npm i -D
+$ npm t
+```
+
+### Tests
+These test check the served values and requested changes from the test database and the error handling of those requests.
+
+example:
+
+```
+it('delivers an array of restaurants', ()=>{
+                const keys = ['id', 'name', 'address', 'cuisine', 'dog-friendly', 'vegan-options', 'rating'] 
+                return request
+                    .get('/api/restaurants')
+                    .then(({ body: {restaurants}}) => {
+                        expect(restaurants[0]).to.include.keys(keys)
+                    })
+            })
+```
+
+This example test checks that a valid GET request will return an array of objects with the correct keys.
+
+### Running locally
+
+To have the app run locally enter the following commands in the project directory:
+
+```
+npm run dev
+```
+
+Note that this will require port 9090 to be available.
+
+### Deployment
+This repo is set up to be hosted on heroku for the backend.
+
+To deploy another, follow the following steps:
+
+#### Go to the backend directory and set up the heroku repository and database:
+
+```
+heroku create
+```
+
+#### push to the heroku remote
+
+```
+git add .
+git commit -m "heroku initial commit"
+git push heroku master
+
+```
+
+
+### Built With
+
+###### [express]
+server framework
+
+## Contributing
+Feel free to contribute.
+
+### Versioning
+Version control handled by git and github.
+
+### Authors
+Tom Turner - ThomasPTurner
+
+### License
+This project is licensed under the MIT License - see the LICENSE.md file for details
