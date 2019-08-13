@@ -32,12 +32,11 @@ describe('/api', ()=>{
             })
             it('takes a query to filter results', ()=>{
                 return request
-                    .get('/api/restaurants/?vegan_options=true')
+                    .get('/api/restaurants/?vegan-options=true')
                     .expect(200)
                     .then(({body: {restaurants}}) => {
-                        console.log(restaurants)
-                        const areAllTrue = restaurants.every(({vegan_options})=> {
-                            return vegan_options
+                        const areAllTrue = restaurants.every(restaurant=> {
+                            return restaurant['vegan-options']
                         })
                         expect(areAllTrue).to.be.true
                     })

@@ -1,8 +1,11 @@
 const  { getRestaurantsFromJson } = require('../models/index')
 
-const getRestaurants = async (req, res, next) => {
+const getRestaurants = async ({query}, res, next) => {
     const restaurants = await getRestaurantsFromJson()
-    return res.status(200).send({restaurants})
+    const filteredRestaurants = restaurants.filter(restaurant => {
+        return query['vegan-options'] ? restaurant['vegan-options'] === true : true
+    })
+    return res.status(200).send({restaurants: filteredRestaurants})
 }
 
 const getRestaurantById = async ({params: {restaurant_id}}, res, next) => {
