@@ -3,3 +3,4 @@ const PORT = process.env.port || 9090
 
 
 app.listen(PORT)
+console.log(`listening on ${PORT}`)
