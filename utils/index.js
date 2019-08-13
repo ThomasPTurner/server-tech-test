@@ -20,3 +20,11 @@ exports.filterObjectsByMultipleKeys = (array, filterObj) => {
         })
     })
 }
+
+// filters an array of objects based on an array nested within those objects
+exports.filterObjectsByNestedArrayContents = (inputArray, key, nestedArrayIncludes) => {
+    if (nestedArrayIncludes.length === 0) return inputArray
+    return inputArray.filter(element => {
+        return element[key].includes(nestedArrayIncludes[0])
+    }) 
+}

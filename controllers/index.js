@@ -1,10 +1,12 @@
 const { getRestaurantsFromJson } = require('../models/index')
-const { filterObjectsByMultipleKeys } = require('../utils')
+const { filterObjectsByMultipleKeys, filterObjectsByNestedArrayContents } = require('../utils')
 
 const getRestaurants = async ({query}, res, next) => {
     const restaurants = await getRestaurantsFromJson()
     const { cuisine, ...restOfQuery} = query
-    const filteredRestaurants = filterObjectsByMultipleKeys(restaurants, {...restOfQuery})
+    const cuisineArray = cuisine ? cuisine.split(',') : [] 
+    const filteredByCuisine = filterObjectsByNestedArrayContents(restaurants, 'cuisine', cuisineArray)
+    const filteredRestaurants = filterObjectsByMultipleKeys(filteredByCuisine, {...restOfQuery})
     return res.status(200).send({restaurants: filteredRestaurants})
 }
 

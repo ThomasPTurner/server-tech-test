@@ -57,10 +57,8 @@ describe('/api', ()=>{
                     .get('/api/restaurants/?cuisine=British')
                     .expect(200)
                     .then(({body: {restaurants}}) => {
-                        console.log(restaurants)
                         const areAllTrue = restaurants.every( ({cuisine}) => {
-                            console.log(cuisine)
-                            cuisine.includes('British')
+                            return cuisine.includes('British')
                         })
                         expect(areAllTrue).to.be.true
                     })
