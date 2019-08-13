@@ -1,7 +1,6 @@
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const { expect } = chai;
-chai.use(require('chai-sorted'));
 const app = require('../app');
 const request = require('supertest')(app);
 const { getRestaurantsFromJson } = require('../models/index')
@@ -29,6 +28,18 @@ describe('/api', ()=>{
                     .get('/api/restaurants')
                     .then(({ body: {restaurants}}) => {
                         expect(restaurants[0]).to.include.keys(keys)
+                    })
+            })
+            it('takes a query to filter results', ()=>{
+                return request
+                    .get('/api/restaurants/?vegan_options=true')
+                    .expect(200)
+                    .then(({body: {restaurants}}) => {
+                        console.log(restaurants)
+                        const areAllTrue = restaurants.every(({vegan_options})=> {
+                            return vegan_options
+                        })
+                        expect(areAllTrue).to.be.true
                     })
             })
         })
