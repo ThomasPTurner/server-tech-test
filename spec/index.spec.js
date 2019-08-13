@@ -23,6 +23,14 @@ describe('/api', ()=>{
                     .get('/api/restaurants')
                     .expect(200)
             })
+            it('delivers an array of restaurants', ()=>{
+                const keys = ['id', 'name', 'address', 'cuisine', 'dog-friendly', 'vegan-options', 'rating'] 
+                return request
+                    .get('/api/restaurants')
+                    .then(({ body: {restaurants}}) => {
+                        expect(restaurants[0]).to.include.keys(keys)
+                    })
+            })
         })
     })
 })
