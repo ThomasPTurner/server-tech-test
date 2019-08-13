@@ -16,7 +16,7 @@ describe('models', () => {
 });
 
 describe('/api', ()=>{
-    describe('/restaurants', ()=>{
+    describe('api/restaurants', ()=>{
         describe('GET', ()=>{
             it('200 on request', ()=>{
                 return request
@@ -32,5 +32,23 @@ describe('/api', ()=>{
                     })
             })
         })
+        describe('api/restaurants/:restaurant_id', () => {
+            it('200 on request', () => {
+                return request
+                    .get('/api/restaurant/2')
+                    .expect(200)
+                    .then(({body: { restaurant: {id} }})=>{
+                        expect(id).to.equal(2)
+                    })
+            });
+            // it('delivers target restaurant', () => {
+            //     return request
+            //         .get('/api/restaurant/2')
+            //         .expect(200)
+            //         .then(({body: { restaurant: {id} }})=>{
+            //             expect(id).to.equal(2)
+            //         })
+            // });
+        });
     })
 })
