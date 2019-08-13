@@ -10,7 +10,7 @@ describe('/api', ()=>{
         describe('GET', ()=>{
             it('200 on request', ()=>{
                 return request
-                    .get('/api/restaurants/')
+                    .get('/api/restaurants')
                     .expect(200)
             })
         })
