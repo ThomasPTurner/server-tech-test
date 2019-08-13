@@ -1,4 +1,4 @@
-const  { getRestaurantsFromJson } = require('../utils/index')
+const  { getRestaurantsFromJson } = require('../models/index')
 
 const getRestaurants = async (req, res, next) => {
     const restaurants = await getRestaurantsFromJson()
