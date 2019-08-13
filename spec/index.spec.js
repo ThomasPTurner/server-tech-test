@@ -33,22 +33,26 @@ describe('/api', ()=>{
             })
         })
         describe('api/restaurants/:restaurant_id', () => {
-            it('200 on request', () => {
-                return request
-                    .get('/api/restaurants/2')
-                    .expect(200)
-                    .then(({body: { restaurant: {id} }})=>{
-                        expect(id).to.equal(2)
-                    })
+            describe('GET', () => {
+                it('200 on request', () => {
+                    return request
+                        .get('/api/restaurants/2')
+                        .expect(200)
+                });
+                it('delivers target restaurant', () => {
+                    return request
+                        .get('/api/restaurants/2')
+                        .expect(200)
+                        .then(({body: { restaurant: {id} }})=>{
+                            expect(id).to.equal(2)
+                        })
+                });
+                it('404 on non existent restaurant', ()=> {
+                    return request
+                        .get('/api/restaurants/9001')
+                        .expect(404)
+                })
             });
-            // it('delivers target restaurant', () => {
-            //     return request
-            //         .get('/api/restaurant/2')
-            //         .expect(200)
-            //         .then(({body: { restaurant: {id} }})=>{
-            //             expect(id).to.equal(2)
-            //         })
-            // });
         });
     })
 })

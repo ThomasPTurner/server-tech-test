@@ -7,11 +7,13 @@ const getRestaurants = async (req, res, next) => {
 
 const getRestaurantById = async ({params: {restaurant_id}}, res, next) => {
     const restaurants = await getRestaurantsFromJson()
-
-    const [restaurant] = restaurants.filter(({id})=> {
+    const restaurant = restaurants.filter(({id})=> {
         return(+id === +restaurant_id)
     })
-    return res.status(200).send({ restaurant })
+    if (restaurant.length === 1) {
+        return res.status(200).send({ restaurant: restaurant[0] })
+    }
+    return res.status(404).send({status:404, msg:"not found"})
 } 
 
 module.exports = {
