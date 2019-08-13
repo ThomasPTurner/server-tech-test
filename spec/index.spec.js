@@ -35,7 +35,7 @@ describe('/api', ()=>{
         describe('api/restaurants/:restaurant_id', () => {
             it('200 on request', () => {
                 return request
-                    .get('/api/restaurant/2')
+                    .get('/api/restaurants/2')
                     .expect(200)
                     .then(({body: { restaurant: {id} }})=>{
                         expect(id).to.equal(2)
