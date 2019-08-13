@@ -3,7 +3,8 @@ const { filterObjectsByMultipleKeys } = require('../utils')
 
 const getRestaurants = async ({query}, res, next) => {
     const restaurants = await getRestaurantsFromJson()
-    const filteredRestaurants = filterObjectsByMultipleKeys(restaurants, query)
+    const { cuisine, ...restOfQuery} = query
+    const filteredRestaurants = filterObjectsByMultipleKeys(restaurants, {...restOfQuery})
     return res.status(200).send({restaurants: filteredRestaurants})
 }
 

@@ -4,6 +4,7 @@
   "description": "This task comes with a JSON file containing restaurant data. The challenge is to build an Express REST API which provides restaurant information to the user. In one hour, please complete as many of the tasks as possible. We do not expect you to finish this test, just do as much as possible in the time frame.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon listen.js",
     "test": "mocha spec"
   },
   "repository": {

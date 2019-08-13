@@ -52,6 +52,19 @@ describe('/api', ()=>{
                         expect(areAllTrue).to.be.true
                     })
             })
+            it('query to filter by cuisine', ()=>{
+                return request
+                    .get('/api/restaurants/?cuisine=British')
+                    .expect(200)
+                    .then(({body: {restaurants}}) => {
+                        console.log(restaurants)
+                        const areAllTrue = restaurants.every( ({cuisine}) => {
+                            console.log(cuisine)
+                            cuisine.includes('British')
+                        })
+                        expect(areAllTrue).to.be.true
+                    })
+            })
         })
         describe('api/restaurants/:restaurant_id', () => {
             describe('GET', () => {
